@@ -1,0 +1,52 @@
+/* Feel Good Properties — stacking, focus, opacity, density.
+   Structure per reference architecture; values tuned to this brand. */
+
+:root {
+  /* ---- z-index scale (never hardcode z-index) ---- */
+  --z-base: 0; /* @kind other */
+  --z-raised: 1; /* @kind other */
+  --z-dropdown: 1000; /* @kind other */
+  --z-sticky: 1100; /* @kind other */
+  --z-banner: 1200; /* @kind other */
+  --z-overlay: 1300; /* @kind other */
+  --z-modal: 1400; /* @kind other */
+  --z-popover: 1500; /* @kind other */
+  --z-toast: 1700; /* @kind other */
+  --z-tooltip: 1800; /* @kind other */
+
+  /* ---- Focus ring (one definition, consumed everywhere) ----
+     TERRACOTA hairline at 3px offset; inner white ring on dark fills. */
+  --focus-ring-color: var(--fgp-terracota);
+  --focus-ring-width: 1px; /* @kind spacing */
+  --focus-ring-offset: 3px; /* @kind spacing */
+  --focus-ring: var(--focus-ring-width) solid var(--focus-ring-color); /* @kind other */
+  --focus-ring-on-dark: var(--focus-ring-width) solid var(--fgp-white); /* @kind other */
+
+  /* ---- Opacity ---- */
+  --opacity-disabled: 0.35; /* @kind other */
+  --opacity-overlay: 0.5; /* @kind other */
+  --opacity-hover-tint: 0.06; /* @kind other */
+
+  /* ---- Density (comfortable default; compact remaps below) ---- */
+  --control-h-sm: 36px; /* @kind spacing */
+  --control-h-md: 44px; /* @kind spacing */
+  --control-h-lg: 52px; /* @kind spacing */
+  --table-row-h: 56px; /* @kind spacing */
+  --table-cell-px: 16px; /* @kind spacing */
+
+  /* ---- Breakpoints & containers (informational tokens) ---- */
+  --bp-sm: 640px; /* @kind spacing */
+  --bp-md: 768px; /* @kind spacing */
+  --bp-lg: 1024px; /* @kind spacing */
+  --bp-xl: 1280px; /* @kind spacing */
+  --bp-2xl: 1536px; /* @kind spacing */
+  --container-prose: 65ch; /* @kind spacing */
+}
+
+[data-density="compact"] {
+  --control-h-sm: 28px; /* @kind spacing */
+  --control-h-md: 36px; /* @kind spacing */
+  --control-h-lg: 44px; /* @kind spacing */
+  --table-row-h: 40px; /* @kind spacing */
+  --table-cell-px: 12px; /* @kind spacing */
+}

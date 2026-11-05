@@ -1,0 +1,37 @@
+/* Feel Good Properties — motion.
+   "Hacer que todo funcione con facilidad." Movement is calm and short:
+   opacity and small translations, no bounce, no overshoot, no spring.
+   Nothing scales up on hover; press states settle rather than pop. */
+
+:root {
+  --duration-instant: 80ms; /* @kind other */
+  --duration-fast: 160ms; /* @kind other */
+  --duration-base: 240ms; /* @kind other */
+  --duration-slow: 420ms; /* @kind other */
+  --duration-reveal: 720ms; /* @kind other */
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1); /* @kind other */
+
+  --transition-color: color var(--duration-fast) var(--ease-standard), background-color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard); /* @kind other */
+  --transition-opacity: opacity var(--duration-base) var(--ease-standard); /* @kind other */
+  --transition-transform: transform var(--duration-slow) var(--ease-out); /* @kind other */
+
+  /* Interaction deltas */
+  --hover-opacity: 0.68; /* @kind other */
+  --press-opacity: 0.5; /* @kind other */
+  --press-translate: 1px; /* @kind spacing */   /* settles down, never shrinks */
+  --image-hover-scale: 1.03; /* @kind other */ /* the only scale in the system — inside a frame */
+  --disabled-opacity: 0.35; /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms; /* @kind other */
+    --duration-base: 0ms; /* @kind other */
+    --duration-slow: 0ms; /* @kind other */
+    --duration-reveal: 0ms; /* @kind other */
+    --image-hover-scale: 1; /* @kind other */
+  }
+}

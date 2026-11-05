@@ -1,0 +1,75 @@
+/* Feel Good Properties — colour.
+   Four official colours, from the Manual de Identidad (p.13) and the Guía de Uso.
+   Gradients and opacity variations require Marketing sign-off, so this file
+   exposes only flat values plus the ink-on-paper alphas the mockups actually use. */
+
+:root {
+  /* ---- Official palette (base) ---- */
+  --fgp-carbon: #000000;    /* CARBÓN — Pantone Process Black C */
+  --fgp-terracota: #451717; /* TERRACOTA — Pantone 209 C */
+  --fgp-oliva: #676849;     /* OLIVA — Pantone 5773 C */
+  --fgp-lino: #f1eae0;      /* LINO — Pantone 7527 C */
+  --fgp-white: #ffffff;
+
+  /* ---- Tonal variants ----
+     "Sobre fondos oscuros: utilizar el logotipo en una tonalidad más clara
+      del mismo color" (Manual p.20). These are the tints the delivered
+      PowerPoint template and brochure actually use. */
+  --fgp-oliva-claro: #919267;  /* lighter olive — accent type on OLIVA grounds */
+  --fgp-oliva-oscuro: #363a29; /* darker olive — folleto.idml (RGB 54 58 41) */
+  --fgp-lino-pptx: #f1eae1;    /* LINO as authored in FGP-Press.pptx (1 step off) */
+
+  /* ---- Ink alphas (derived) ----
+     Not in the manual. Needed for UI hierarchy; all are CARBÓN at reduced
+     opacity so nothing new enters the palette. */
+  --fgp-ink-88: rgba(0, 0, 0, 0.88);
+  --fgp-ink-62: rgba(0, 0, 0, 0.62);
+  --fgp-ink-45: rgba(0, 0, 0, 0.45);
+  --fgp-ink-26: rgba(0, 0, 0, 0.26);
+  --fgp-ink-16: rgba(0, 0, 0, 0.16);
+  --fgp-ink-08: rgba(0, 0, 0, 0.08);
+  --fgp-paper-70: rgba(255, 255, 255, 0.7);
+  --fgp-paper-40: rgba(255, 255, 255, 0.4);
+  --fgp-paper-16: rgba(255, 255, 255, 0.16);
+
+  /* ---- Semantic: surfaces ---- */
+  --surface-page: var(--fgp-white);
+  --surface-linen: var(--fgp-lino);
+  --surface-ink: var(--fgp-carbon);
+  --surface-olive: var(--fgp-oliva);
+  --surface-terracotta: var(--fgp-terracota);
+  --surface-card: var(--fgp-white);
+  --surface-card-linen: var(--fgp-lino);
+
+  /* ---- Semantic: text ---- */
+  --text-body: var(--fgp-carbon);
+  --text-secondary: var(--fgp-ink-62);
+  --text-muted: var(--fgp-ink-45);
+  --text-on-ink: var(--fgp-white);
+  --text-on-olive: var(--fgp-lino);
+  --text-on-terracotta: var(--fgp-lino);
+  --text-accent-on-olive: var(--fgp-oliva-claro);
+  --text-price: var(--fgp-carbon);
+
+  /* ---- Semantic: lines & interaction ---- */
+  --border-rule: var(--fgp-carbon);      /* the .5pt decorative rule */
+  --border-subtle: var(--fgp-ink-16);
+  --border-field: var(--fgp-ink-26);
+  --border-on-dark: var(--fgp-paper-40);
+
+  --action-fill: var(--fgp-carbon);
+  --action-fill-hover: var(--fgp-terracota);
+  --action-label: var(--fgp-white);
+  --action-ghost-border: var(--fgp-carbon);
+  --action-focus-ring: var(--fgp-terracota);
+
+  --link-color: var(--fgp-carbon);
+  --link-color-hover: var(--fgp-terracota);
+  --link-on-dark: var(--fgp-white);
+  --link-on-dark-hover: var(--fgp-lino);
+
+  /* Photographic scrim — "el logotipo debe colocarse en una zona clara,
+     de alto contraste o libre de elementos" (Manual p.21). */
+    --scrim-hero: linear-gradient(90deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.72) 34%, rgba(0, 0, 0, 0.1) 72%, rgba(0, 0, 0, 0) 100%); /* @kind other */
+    --scrim-bottom: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.78) 100%); /* @kind other */
+}

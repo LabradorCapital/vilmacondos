@@ -1,0 +1,54 @@
+/* Feel Good Properties — spacing & layout.
+   The brand's own grid is stated in physical units; these are the screen
+   equivalents. The deck stage (1920×1080) uses a 110px side margin, a
+   40px gutter and a 386px card, all measured out of FGP-Press.pptx. */
+
+:root {
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 48px;
+  --space-10: 64px;
+  --space-11: 80px;
+  --space-12: 96px;
+  --space-13: 120px;
+  --space-14: 160px;
+
+  /* ---- Web layout (1440 design width) ---- */
+  --layout-max: 1440px;
+  --layout-gutter: 72px;
+  --layout-gutter-sm: 24px;
+  --layout-column-gap: 24px;
+  --layout-section-y: 96px;
+  --layout-section-y-lg: 128px;
+  --layout-hero-h: 620px;
+  --layout-nav-h: 84px;
+
+  /* ---- Presentation stage (1920×1080) ---- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-margin-x: 110px;
+  --slide-margin-top: 106px;
+  --slide-rail-x: 56px;      /* rotated FEEL GOOD PROPERTIES rail */
+  --slide-folio-x: 1691px;
+  --slide-folio-y: 998px;
+  --slide-card-w: 386px;
+  --slide-card-h: 523px;
+  --slide-card-gap: 40px;
+  --slide-card-pad: 33px;
+
+  /* ---- Logo clear space ----
+     "Utilizar la letra O de la marca como el espacio mínimo alrededor"
+     (Manual p.18) ≈ 0.34 of the horizontal lockup's height. */
+  --logo-clearspace: 0.34em; /* @kind spacing */
+  --logo-min-width-print: 2cm; /* @kind spacing */
+  --logo-min-width-screen: 96px; /* @kind spacing */
+  --isotipo-min-width-print: 1cm; /* @kind spacing */
+  --isotipo-min-width-screen: 24px; /* @kind spacing */
+}

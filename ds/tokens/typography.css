@@ -1,0 +1,110 @@
+/* Feel Good Properties — typography.
+   Two families only. Hierarchy is fixed by the manual (p.15):
+     TÍTULO           Bodoni Moda Regular, UPPERCASE
+     ACENTOS          Bodoni Moda Italic, sentence case
+     CEJA / SUBTÍTULO Work Sans SemiBold, UPPERCASE, tracked
+     CUERPO DE TEXTO  Work Sans Regular
+   Screen sizes below are measured from FGP-Press.pptx (1920×1080 stage,
+   2px per pt) and the fgp-web.psd mockup (1440 design width). */
+
+:root {
+  --font-display: "Bodoni Moda", "Bodoni MT", Didot, "Times New Roman", serif;
+  --font-text: "Work Sans", "Helvetica Neue", Arial, sans-serif;
+
+  /* Bodoni Moda masters at 18pt in every brand file; lock the opsz axis so
+     large display type keeps the delivered hairline weight. */
+  --display-optical-size: "opsz" 18; /* @kind font */
+
+  --weight-regular: 400; /* @kind font */
+  --weight-medium: 500; /* @kind font */
+  --weight-semibold: 600; /* @kind font */
+
+  /* ---- Tracking ----
+     "Interletrado 25 pts" on tracked labels; the .pptx authors it as
+     spc="300" on 12pt runs = 0.25em. */
+  --tracking-display: -0.01em; /* @kind font */
+  --tracking-normal: 0; /* @kind font */
+  --tracking-label: 0.12em; /* @kind font */
+  --tracking-wide: 0.25em; /* @kind font */
+  --tracking-lockup: 0.32em; /* @kind font */ /* PROPERTIES under the wordmark */
+
+  /* ---- Leading ---- */
+  --leading-display: 0.8; /* @kind font */  /* lnSpc 80% on every deck title */
+  --leading-accent: 1.3; /* @kind font */   /* lnSpc 130% on Bodoni Italic accents */
+  --leading-body: 1.25; /* @kind font */    /* lnSpc 125% in the deck */
+  --leading-body-web: 1.7; /* @kind font */ /* looser on web, per the mockup */
+  --leading-tight: 1.05; /* @kind font */
+
+  /* ---- Screen scale — web (1440) ---- */
+  --size-display-1: 76px;  /* hero, Bodoni caps */
+  --size-display-2: 48px;  /* section header */
+  --size-display-3: 40px;  /* band title */
+  --size-display-4: 30px;  /* card headline / stat */
+  --size-accent: 30px;     /* "Subtítulo" — Bodoni Italic */
+  --size-accent-sm: 20px;
+  --size-body-lg: 17px;
+  --size-body: 15px;
+  --size-body-sm: 13px;
+  --size-label: 11px;      /* uppercase Work Sans SemiBold */
+  --size-micro: 10px;
+
+  /* ---- Screen scale — presentation (1920×1080) ---- */
+  --slide-size-title: 120px;    /* 60pt */
+  --slide-size-stat: 108px;     /* 54pt */
+  --slide-size-accent: 48px;    /* 24pt */
+  --slide-size-body: 28px;      /* 14pt */
+  --slide-size-caption: 24px;   /* 12pt */
+  --slide-size-rail: 24px;      /* 12pt vertical rail label */
+
+  /* ---- Print scale (pt, from the manual's application specs) ---- */
+  --print-name: 11.5pt; /* @kind font */    /* business-card name, Bodoni Regular */
+  --print-role: 8.5pt; /* @kind font */     /* Bodoni Italic */
+  --print-contact: 7pt; /* @kind font */    /* Work Sans Regular */
+  --print-url: 7pt; /* @kind font */        /* Work Sans SemiBold, tracked */
+  --print-sig-name: 14pt; /* @kind font */
+  --print-sig-role: 10.5pt; /* @kind font */
+  --print-sig-contact: 8.5pt; /* @kind font */
+}
+
+/* ---- Roles ---- */
+.fgp-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
+  font-variation-settings: var(--display-optical-size);
+  font-optical-sizing: none;
+  text-transform: uppercase;
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+}
+.fgp-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--weight-regular);
+  font-variation-settings: var(--display-optical-size);
+  font-optical-sizing: none;
+  line-height: var(--leading-accent);
+  letter-spacing: var(--tracking-normal);
+}
+.fgp-eyebrow {
+  font-family: var(--font-text);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  line-height: 1.2;
+}
+.fgp-label {
+  font-family: var(--font-text);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  line-height: 1.2;
+}
+.fgp-body {
+  font-family: var(--font-text);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-body-web);
+  letter-spacing: var(--tracking-normal);
+}
+/* Amounts, tables, timers, identifiers — digits must align. */
+.fgp-tabular, .fgp-amount { font-variant-numeric: tabular-nums lining-nums }
+.fgp-mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums }

@@ -1,0 +1,33 @@
+/* Feel Good Properties — edges, radii, elevation.
+   The identity is square: every panel, card, tag and image frame in the
+   delivered materials is a true rectangle. Radius exists only where the
+   form is a circle (isotipo seal, avatar, social buttons) or a pill
+   (the search field in fgp-web.psd). */
+
+:root {
+  --radius-none: 0;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* The "línea horizontal decorativa: .5 pts en color negro" that appears
+     on the letterhead, business card and email signature. */
+  --rule-hairline: 1px;
+  --rule-weight-print: 0.5pt; /* @kind spacing */
+  --border-width: 1px;
+  --border-width-field: 1px;
+
+  --border-hairline: var(--rule-hairline) solid var(--border-rule); /* @kind other */
+  --border-card: var(--border-width) solid var(--border-subtle); /* @kind other */
+  --border-input: var(--border-width-field) solid var(--border-field); /* @kind other */
+
+  /* Elevation is near-absent by design: "composiciones limpias, equilibradas
+     y sofisticadas". Cards sit flat on their ground. Use these only for
+     genuinely floating surfaces (menus, the vCard sheet). */
+  --shadow-none: none;
+  --shadow-sheet: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-menu: 0 2px 4px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.12);
+  --shadow-inset-rule: inset 0 -1px 0 var(--border-subtle);
+
+  /* Transparency & blur — only over photography, never over flat colour. */
+  --blur-glass: saturate(120%) blur(14px); /* @kind other */
+}

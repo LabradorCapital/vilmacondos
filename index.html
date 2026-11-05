@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vilma Condos · Puerto Morelos</title>
+<link rel="stylesheet" href="vilma.css">
+<style>
+.hero{position:relative;min-height:760px;height:100vh;max-height:960px;color:var(--fgp-white);overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
+.hero::after{content:"";position:absolute;inset:0;background:var(--scrim-hero)}
+.hero>.wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:var(--space-13)}
+.hero h1{font-size:clamp(48px,7vw,var(--size-display-1));max-width:12ch}
+.hero .accent{font-size:var(--size-accent);margin:var(--space-5) 0 var(--space-6)}
+.hero .ctas{display:flex;gap:var(--space-4);flex-wrap:wrap}
+.hero .loc{position:absolute;right:var(--layout-gutter);bottom:var(--space-13);z-index:2;color:var(--fgp-paper-70)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-8)}
+.tag{display:inline-flex;align-items:center;gap:var(--space-2);height:36px;padding:0 var(--space-4);border:1px solid var(--fgp-paper-70);font:600 var(--size-label)/1 var(--font-text);text-transform:uppercase;letter-spacing:var(--tracking-label);color:var(--fgp-white);background:rgba(0,0,0,.18)}
+.tag b{font-weight:700}
+.tag .dot{width:8px;height:8px;border-radius:50%;background:var(--fgp-terracota)}
+.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:var(--space-11);align-items:center}
+.intro .txt{display:grid;gap:var(--space-5)}
+.intro .txt p{margin:0;max-width:52ch;text-wrap:pretty}
+.intro .lead{font-size:var(--size-accent);color:var(--fgp-carbon)}
+.intro .ph{aspect-ratio:4/5;overflow:hidden}
+.intro .ph img{width:100%;height:100%;object-fit:cover}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts div{padding:var(--space-10) var(--space-7);border-left:1px solid var(--fgp-paper-16);display:grid;gap:var(--space-3)}
+.facts div:first-child{border-left:0;padding-left:0}
+.facts b{font-family:var(--font-display);font-style:italic;font-weight:400;font-variation-settings:var(--display-optical-size);font-size:56px;line-height:1}
+/* ubicación */
+.ubic{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);min-height:640px}
+.ubic .ph{overflow:hidden}
+.ubic .ph img{width:100%;height:100%;object-fit:cover}
+.ubic .txt{padding:var(--space-12) var(--layout-gutter);display:grid;gap:var(--space-6);align-content:center}
+.ubic h2{font-size:var(--size-display-2)}
+.ubic p{margin:0;max-width:52ch}
+.pm-list{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--border-rule)}
+.pm-list li{display:grid;grid-template-columns:132px 1fr;gap:var(--space-5);align-items:baseline;padding:var(--space-4) 0;border-bottom:1px solid var(--border-subtle)}
+.pm-list b{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:var(--size-accent-sm);line-height:1.1}
+.pm-list span{font-size:var(--size-body-sm)}
+.ubic .addr{font-size:var(--size-body-sm);color:var(--text-secondary)}
+.ubic .ctas{display:flex;gap:var(--space-4);flex-wrap:wrap}
+/* amenidades */
+.amen{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:var(--space-11);align-items:start}
+.amen .ph{aspect-ratio:1/1;overflow:hidden}
+.amen .ph img{width:100%;height:100%;object-fit:cover}
+.amen ol{list-style:none;margin:0;padding:0;display:grid}
+.amen li{display:grid;grid-template-columns:56px 1fr;align-items:baseline;padding:var(--space-4) 0;border-bottom:1px solid var(--fgp-paper-40)}
+.amen li span:first-child{font-family:var(--font-display);font-style:italic;font-size:var(--size-accent-sm);color:var(--text-accent-on-olive)}
+.amen li span:last-child{font-family:var(--font-display);text-transform:uppercase;font-size:22px;letter-spacing:.02em}
+.amen .note{margin-top:var(--space-6);font-size:var(--size-body-sm);color:var(--fgp-lino)}
+.amen-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);margin-top:var(--space-6)}
+.amen-strip div{aspect-ratio:16/10;overflow:hidden}
+.amen-strip img{width:100%;height:100%;object-fit:cover}
+/* residencias */
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-7)}
+.type{background:var(--fgp-white);display:grid;grid-template-rows:auto 1fr}
+.type .ph{aspect-ratio:3/2;overflow:hidden}
+.type .ph img{width:100%;height:100%;object-fit:cover;transition:transform 420ms var(--ease-out,cubic-bezier(.16,1,.3,1))}
+.type:hover .ph img{transform:scale(1.03)}
+.type .bd{padding:var(--space-8);display:grid;gap:var(--space-5);align-content:start}
+.type h3{font-size:var(--size-display-3)}
+.type .m2{font-family:var(--font-display);font-style:italic;font-size:var(--size-accent-sm)}
+.type ul{margin:0;padding:0;list-style:none;display:grid;gap:var(--space-2);border-top:1px solid var(--border-rule);padding-top:var(--space-5)}
+.type li{display:flex;justify-content:space-between;gap:var(--space-4);font-size:var(--size-body-sm)}
+.type li span:last-child{color:var(--text-secondary)}
+.type .from{display:flex;justify-content:space-between;align-items:baseline;gap:var(--space-4);border-top:1px solid var(--border-rule);padding-top:var(--space-5)}
+.type .from b{font-family:var(--font-display);font-weight:400;font-size:28px}
+/* interiores */
+.gallery{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:220px;gap:var(--space-3)}
+.gallery figure{margin:0;overflow:hidden;position:relative}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform 420ms cubic-bezier(.16,1,.3,1)}
+.gallery figure:hover img{transform:scale(1.03)}
+.gallery figure,.zoomable{cursor:zoom-in}
+.gallery figure:focus-visible,.zoomable:focus-visible{outline:1px solid var(--action-focus-ring);outline-offset:3px}
+.amen-strip>div:hover img,.amen .ph:hover img{transform:scale(1.03)}
+.amen .ph img,.amen-strip img{transition:transform 420ms cubic-bezier(.16,1,.3,1)}
+.lb{position:fixed;inset:0;z-index:100;background:rgba(20,18,16,.94);display:none;align-items:center;justify-content:center;padding:72px 80px}
+.lb.open{display:flex}
+.lb figure{margin:0;display:grid;gap:var(--space-4);justify-items:center;max-width:100%;max-height:100%}
+.lb img{max-width:100%;max-height:calc(100vh - 160px);object-fit:contain;cursor:zoom-out}
+.lb figcaption{color:var(--fgp-white);display:flex;gap:var(--space-5)}
+.lb figcaption span:last-child{color:var(--fgp-paper-70)}
+.lb button{position:absolute;background:none;border:1px solid var(--fgp-paper-40);color:var(--fgp-white);width:48px;height:48px;font:400 24px/1 var(--font-text);cursor:pointer;transition:background 160ms,color 160ms}
+.lb button:hover{background:var(--fgp-white);color:var(--fgp-carbon)}
+.lb .x{top:20px;right:20px}
+.lb .pv{left:20px;top:50%;transform:translateY(-50%)}
+.lb .nx{right:20px;top:50%;transform:translateY(-50%)}
+@media (max-width:900px){.lb{padding:64px 12px}.lb .pv,.lb .nx{top:auto;bottom:16px;transform:none}}
+.gallery figcaption{position:absolute;left:var(--space-4);bottom:var(--space-3);color:var(--fgp-white);background:none;z-index:1}
+.gallery figure::after{content:"";position:absolute;inset:0;background:var(--scrim-bottom);pointer-events:none}
+.g1{grid-column:span 4;grid-row:span 2}.g2{grid-column:span 2}.g3{grid-column:span 2}.g4{grid-column:span 2}.g5{grid-column:span 2}.g6{grid-column:span 2}
+.finishes{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--space-11);margin-top:var(--space-11);padding-top:var(--space-9);border-top:1px solid var(--border-rule)}
+.finishes .hd{display:grid;gap:var(--space-4);align-content:start}
+.finishes .hd h3{font-size:var(--size-display-3)}
+.finishes .hd .accent{font-size:var(--size-accent-sm);color:var(--text-secondary)}
+.finishes .hd p{margin:0;max-width:40ch}
+.fin-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 var(--space-8)}
+.fin{padding:var(--space-5) 0;border-bottom:1px solid var(--border-rule);display:grid;gap:var(--space-2)}
+.fin .label{color:var(--text-secondary)}
+.fin ul{margin:0;padding:0 0 0 1.1em;display:grid;gap:var(--space-1);font-size:var(--size-body-sm)}
+.fin-note{grid-column:1/-1;margin:var(--space-5) 0 0;font-size:var(--size-body-sm);color:var(--text-secondary)}
+/* tipologías */
+.lv-tabs{display:flex;flex-wrap:wrap;margin-bottom:var(--space-7)}
+.lv-tabs button{font:600 var(--size-label)/1 var(--font-text);text-transform:uppercase;letter-spacing:var(--tracking-label);height:44px;padding:0 var(--space-6);border:1px solid var(--border-field);margin-left:-1px;background:var(--fgp-white);color:var(--fgp-carbon);cursor:pointer;white-space:nowrap;transition:all 160ms}
+.lv-tabs button:first-child{margin-left:0}
+.lv-tabs button:hover{border-color:var(--fgp-carbon);position:relative}
+.lv-tabs button[aria-selected="true"]{background:var(--fgp-carbon);color:var(--fgp-white);border-color:var(--fgp-carbon);position:relative}
+.lv{display:grid;gap:var(--space-7)}
+.lv[hidden]{display:none}
+.lv-head{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--space-6);flex-wrap:wrap}
+.lv-head h3{font-size:var(--size-display-3);margin-bottom:var(--space-3)}
+.lv-head .accent{font-size:var(--size-accent-sm);color:var(--text-secondary)}
+.lv-head .cta{display:flex;gap:var(--space-4);flex-wrap:wrap}
+.tp-grid{display:grid;grid-template-columns:var(--cols);gap:var(--space-5);align-items:stretch}
+.tp{background:var(--surface-linen);display:grid;grid-template-rows:1fr auto;margin:0}
+.tp .im{height:440px;padding:var(--space-6);display:flex;align-items:center;justify-content:center}
+.tp img{max-width:100%;max-height:100%;object-fit:contain}
+.tp figcaption{display:grid;gap:var(--space-2);padding:var(--space-5) var(--space-6);border-top:1px solid var(--border-rule);background:var(--fgp-white)}
+.tp .u{font-family:var(--font-display);font-size:22px;line-height:1.1}
+.tp .meta{display:flex;justify-content:space-between;gap:var(--space-3);font-size:var(--size-body-sm);color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.tp-note{font-size:var(--size-body-sm);color:var(--text-secondary);margin:0}
+/* por qué invertir */
+.why-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--fgp-paper-16);border-bottom:1px solid var(--fgp-paper-16);margin-bottom:var(--space-10)}
+.why-stats div{padding:var(--space-8) var(--space-6);border-left:1px solid var(--fgp-paper-16);display:grid;gap:var(--space-3);align-content:start}
+.why-stats div:first-child{border-left:0;padding-left:0}
+.why-stats b{font-family:var(--font-display);font-style:italic;font-weight:400;font-variation-settings:var(--display-optical-size);font-size:52px;line-height:1}
+.why-stats span{font-size:var(--size-body-sm);color:var(--fgp-paper-70)}
+.why-stats .label{color:var(--fgp-white)}
+.why-intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-11);margin-bottom:var(--space-10)}
+.why-intro .accent{font-size:var(--size-accent)}
+.why-intro p{margin:0;color:var(--fgp-paper-70);max-width:60ch}
+.why-intro .txt{display:grid;gap:var(--space-5)}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--fgp-paper-16);border:1px solid var(--fgp-paper-16)}
+.why{background:var(--surface-ink);padding:var(--space-8);display:grid;gap:var(--space-4);align-content:start}
+.why .n{font-family:var(--font-display);font-style:italic;font-size:var(--size-accent-sm);color:var(--fgp-paper-70)}
+.why h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;font-size:22px;letter-spacing:.02em;line-height:1.15;margin:0}
+.why p{margin:0;font-size:var(--size-body-sm);color:var(--fgp-paper-70)}
+.why-close{display:flex;justify-content:space-between;align-items:center;gap:var(--space-7);flex-wrap:wrap;margin-top:var(--space-10)}
+.why-close .accent{font-size:var(--size-accent-sm);max-width:44ch}
+.src{margin-top:var(--space-8);font-size:var(--size-micro);color:var(--fgp-paper-70);line-height:1.6}
+/* ROI */
+.roi{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--space-11);align-items:start}
+.roi .hd{display:grid;gap:var(--space-5)}
+.roi .hd p{margin:0;max-width:42ch}
+.roi .assume{display:grid;gap:var(--space-2);font-size:var(--size-body-sm);color:var(--text-secondary);border-top:1px solid var(--border-rule);padding-top:var(--space-5)}
+.roi .assume p{margin:0}
+.seg{display:flex;flex-wrap:wrap;margin-bottom:var(--space-6)}
+.seg button{font:600 var(--size-label)/1 var(--font-text);text-transform:uppercase;letter-spacing:var(--tracking-label);height:44px;padding:0 var(--space-6);border:1px solid var(--border-field);margin-left:-1px;background:var(--fgp-white);color:var(--fgp-carbon);cursor:pointer;transition:all 160ms}
+.seg button:first-child{margin-left:0}
+.seg button[aria-pressed="true"]{background:var(--fgp-carbon);color:var(--fgp-white);border-color:var(--fgp-carbon);position:relative}
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-5)}
+.sc{background:var(--fgp-white);padding:var(--space-7);display:grid;gap:var(--space-5);align-content:start}
+.sc.mid{background:var(--fgp-carbon);color:var(--fgp-white)}
+.sc .top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--border-rule);padding-bottom:var(--space-4)}
+.sc.mid .top{border-color:var(--fgp-paper-16)}
+.sc .pct{font-family:var(--font-display);font-size:64px;line-height:1;font-variation-settings:var(--display-optical-size)}
+.sc .pct small{display:block;font:600 var(--size-label)/1.2 var(--font-text);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--text-secondary);margin-top:var(--space-3)}
+.sc.mid .pct small,.sc.mid dd{color:var(--fgp-paper-70)}
+.sc dl{margin:0;display:grid;gap:var(--space-3)}
+.sc dl div{display:flex;justify-content:space-between;gap:var(--space-4);font-size:var(--size-body-sm);font-variant-numeric:tabular-nums}
+.sc dd{margin:0;color:var(--text-secondary)}
+.sc dt{font-weight:600}
+.roi-note{margin-top:var(--space-6);font-size:var(--size-body-sm);color:var(--text-secondary);display:grid;gap:var(--space-2)}
+.roi-note p{margin:0}
+/* disponibilidad */
+.avail{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-11);align-items:center;padding:var(--space-11) 0}
+.avail h2{font-size:var(--size-display-3)}
+.avail .accent{font-size:var(--size-accent-sm);color:var(--fgp-lino);margin-top:var(--space-4)}
+.avail .ctas{display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8)}
+.from-big{font-family:var(--font-display);font-weight:400;font-variation-settings:var(--display-optical-size);font-size:clamp(40px,5vw,64px);line-height:1;margin-top:var(--space-6)}
+.from-big small{font:600 var(--size-label)/1 var(--font-text);letter-spacing:var(--tracking-label);text-transform:uppercase;color:var(--fgp-paper-70);margin-left:var(--space-3)}
+.progress{display:grid;gap:var(--space-5)}
+.progress .pv{display:flex;justify-content:space-between;align-items:baseline}
+.progress .pv b{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:72px;line-height:1}
+.pbar{display:flex;height:10px;background:var(--fgp-paper-16)}
+.pbar i{display:block;height:100%}
+.pbar .s{background:var(--fgp-terracota)}
+.pbar .r{background:var(--fgp-lino)}
+.legend{display:flex;gap:var(--space-6);flex-wrap:wrap;font-size:var(--size-body-sm);color:var(--fgp-paper-70)}
+.legend span{display:inline-flex;align-items:center;gap:var(--space-2)}
+.legend i{width:10px;height:10px;display:inline-block}
+/* brochure */
+.bro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-11);align-items:center}
+.bro .ph{aspect-ratio:4/5;overflow:hidden;position:relative}
+.bro .ph img{width:100%;height:100%;object-fit:cover}
+.bro .ph .cover{position:absolute;inset:auto 0 0 0;padding:var(--space-7);color:var(--fgp-white);background:var(--scrim-bottom)}
+.bro .ph .cover b{font-family:var(--font-display);font-weight:400;font-size:40px;letter-spacing:.24em;display:block}
+.bro .txt{display:grid;gap:var(--space-6)}
+.bro h2{font-size:var(--size-display-2)}
+.bro .accent{font-size:var(--size-accent-sm);color:var(--text-secondary)}
+.bro .txt>p{margin:0;max-width:52ch}
+.bro-ok{display:none;gap:var(--space-5);border-top:1px solid var(--border-rule);padding-top:var(--space-7)}
+.bro-ok h3{font-size:var(--size-display-3)}
+.bro-ok p{margin:0}
+.bro-sent #broForm{display:none}.bro-sent .bro-ok{display:grid}
+/* contacto */
+.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--space-11)}
+.contact .aside{display:grid;gap:var(--space-6);align-content:start}
+.contact .aside h2{font-size:var(--size-display-2)}
+.contact .aside .accent{font-size:var(--size-accent-sm)}
+.contact .aside p{margin:0;max-width:40ch}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6)}
+.field{display:grid;gap:var(--space-2)}
+.field.full{grid-column:1/-1}
+.field label{color:var(--text-secondary)}
+.field input,.field select,.field textarea{font:inherit;font-size:var(--size-body);border:1px solid var(--border-field);border-radius:0;background:var(--fgp-white);padding:var(--space-3) var(--space-4);height:48px;color:var(--fgp-carbon);transition:border-color 160ms}
+.field textarea{height:auto;min-height:112px;resize:vertical}
+.field input:hover,.field select:hover,.field textarea:hover{border-color:var(--fgp-carbon)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:1px solid var(--action-focus-ring);outline-offset:3px;border-color:var(--fgp-carbon)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;height:40px;padding:0 var(--space-5);border:1px solid var(--border-field);font-size:var(--size-body-sm);transition:all 160ms}
+.chips label:hover span{border-color:var(--fgp-carbon)}
+.chips input:checked+span{background:var(--fgp-carbon);color:var(--fgp-white);border-color:var(--fgp-carbon)}
+.chips input:focus-visible+span{outline:1px solid var(--action-focus-ring);outline-offset:3px}
+.consent{grid-column:1/-1;display:flex;gap:var(--space-3);align-items:flex-start;font-size:var(--size-body-sm);color:var(--text-secondary)}
+.consent input{margin-top:4px;accent-color:var(--fgp-carbon)}
+.submit{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:var(--space-5);flex-wrap:wrap}
+.err{color:var(--fgp-terracota);font-size:var(--size-body-sm)}
+.thanks{display:none;border-top:1px solid var(--border-rule);padding-top:var(--space-8);gap:var(--space-5)}
+.thanks h3{font-size:var(--size-display-3)}
+.thanks p{margin:0;max-width:48ch}
+.sent #lead{display:none}.sent .thanks{display:grid}
+/* flotantes */
+.wa{position:fixed;right:24px;bottom:24px;z-index:50;display:inline-flex;align-items:center;gap:var(--space-3);height:56px;padding:0 var(--space-5) 0 var(--space-4);border-radius:28px;background:#25D366;color:#fff;text-decoration:none;font:600 var(--size-label)/1 var(--font-text);text-transform:uppercase;letter-spacing:var(--tracking-label);box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform 160ms,box-shadow 160ms}
+.wa:hover{color:#fff;transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.28)}
+.wa svg{width:28px;height:28px;flex-shrink:0}
+.sold-pill{position:fixed;left:24px;bottom:24px;z-index:50;display:inline-flex;align-items:center;gap:var(--space-3);height:44px;padding:0 var(--space-5);background:var(--fgp-carbon);color:var(--fgp-white);text-decoration:none;font:600 var(--size-label)/1 var(--font-text);text-transform:uppercase;letter-spacing:var(--tracking-label);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.sold-pill:hover{color:var(--fgp-white);background:var(--fgp-oliva)}
+.sold-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--fgp-terracota)}
+@media (max-width:900px){
+.tp-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important}.tp .im{height:300px}
+.intro,.amen,.types,.ubic,.contact,.avail,.finishes,.why-intro,.roi,.bro{grid-template-columns:1fr}
+.facts,.why-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.facts div,.why-stats div{padding:var(--space-7) var(--space-5);border-left:0;border-top:1px solid var(--fgp-paper-16)}
+.facts div:first-child,.why-stats div:first-child{padding-left:var(--space-5)}
+.facts b,.why-stats b{font-size:40px}
+.why-grid,.scen,.fin-grid{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:180px}.g1{grid-column:span 2}.g2,.g3,.g4,.g5,.g6{grid-column:span 1}
+.ubic .ph{aspect-ratio:4/3}.ubic .txt{padding:var(--space-10) var(--layout-gutter)}
+.pm-list li{grid-template-columns:1fr;gap:var(--space-1)}
+.hero .loc{display:none}form{grid-template-columns:1fr}.hero{min-height:680px}
+.wa{right:16px;bottom:16px;padding:0 var(--space-4)}.wa span{display:none}
+.sold-pill{left:16px;bottom:22px}
+}
+</style>
+</head>
+<body id="top">
+<header class="hero" data-screen-label="Hero">
+<img src="assets/vilma-rooftop-alberca.jpg" alt="Alberca infinita del rooftop de Vilma con camastros y vista al mar Caribe">
+<nav class="nav">
+<div class="wrap">
+<a class="brand" href="#top" aria-label="Vilma Condos"><b>VILMA</b><small>CONDOS</small></a>
+<ul class="label">
+<li><a href="#proyecto">Proyecto</a></li>
+<li><a href="#ubicacion">Ubicación</a></li>
+<li><a href="#amenidades">Amenidades</a></li>
+<li><a href="#residencias">Residencias</a></li>
+<li><a href="#invertir">Invertir</a></li>
+<li><a href="#disponibilidad">Disponibilidad</a></li>
+</ul>
+<a class="btn light" href="#contacto">Agende una visita</a>
+</div>
+</nav>
+<div class="wrap">
+<p class="eyebrow" style="margin-bottom:var(--space-6)">Puerto Morelos · Quintana Roo</p>
+<h1 class="display">Bienvenidos a Vilma</h1>
+<p class="accent">Un nuevo horizonte frente al mar</p>
+<div class="hero-tags">
+<span class="tag">Desde <b data-desde></b> MXN</span>
+<span class="tag"><i class="dot"></i><b data-pct></b> vendido</span>
+</div>
+<div class="ctas">
+<a class="btn light" href="#contacto">Solicite información</a>
+<a class="btn ghost-light" href="#brochure">Descargar brochure</a>
+</div>
+</div>
+<p class="eyebrow loc">Rooftop · Vista al Caribe</p>
+</header>
+<main>
+<section class="section" id="proyecto" data-screen-label="Proyecto">
+<div class="wrap">
+<div class="sh"><h2 class="display">El proyecto</h2><p class="accent">Vivir, vacacionar o invertir</p></div>
+<div class="intro">
+<div class="txt">
+<p class="accent lead">Departamentos cuidadosamente diseñados, con vistas al mar y un rooftop donde el horizonte del Caribe forma parte de la experiencia diaria.</p>
+<p>Puerto Morelos conserva la tranquilidad y el encanto de un auténtico pueblo costero, rodeado por el Caribe mexicano y una naturaleza privilegiada. Su ubicación estratégica entre Cancún y Playa del Carmen, junto con su ritmo de vida relajado, lo convierten en uno de los destinos con mayor proyección de la Riviera Maya.</p>
+<p>Espacios contemporáneos que combinan confort, diseño y una conexión permanente con el entorno. Una oportunidad donde la calidad de vida y el potencial de crecimiento se encuentran frente al mar.</p>
+</div>
+<div class="ph"><img src="assets/vilma-fachada.jpg" alt="Fachada de Vilma con terrazas ajardinadas y celosías de madera"></div>
+</div>
+</div>
+</section>
+<section class="terra" data-screen-label="Cifras">
+<div class="wrap facts">
+<div><b>34</b><span class="label">Residencias</span></div>
+<div><b>PB + 5</b><span class="label">Niveles</span></div>
+<div><b>42–75</b><span class="label">m² por residencia</span></div>
+<div><b>7</b><span class="label">Amenidades en rooftop</span></div>
+</div>
+</section>
+<section class="ubic" id="ubicacion" data-screen-label="Ubicación">
+<div class="ph"><img src="assets/vilma-rooftop-aerea.jpg" alt="Rooftop de Vilma rodeado de palmeras con el mar Caribe al fondo"></div>
+<div class="txt">
+<p class="eyebrow">Ubicación</p>
+<h2 class="display">Puerto Morelos</h2>
+<p class="accent" style="font-size:var(--size-accent-sm)">El secreto mejor guardado de la Riviera Maya</p>
+<p>Un pueblo costero que conserva su ritmo tranquilo, rodeado de mar, arrecife y manglar, a medio camino entre Cancún y Playa del Carmen.</p>
+<ul class="pm-list">
+<li><b>15 min</b><span>del Aeropuerto Internacional de Cancún, sin el tráfico de la zona hotelera.</span></li>
+<li><b>2 estaciones</b><span>del Tren Maya: el único municipio con dos paradas.</span></li>
+<li><b>Arrecife</b><span>frente a la costa: parte del Sistema Arrecifal Mesoamericano, el segundo más grande del mundo. Buceo y snorkel todo el año.</span></li>
+<li><b>Baja densidad</b><span>alrededor de 17 desarrollos verticales, frente a cerca de 184 en Playa del Carmen y 201 en Cancún.</span></li>
+<li><b>Pueblo auténtico</b><span>herencia pesquera, pesca del día en la mesa y playas turquesa sin multitudes.</span></li>
+</ul>
+<p class="addr">Melgar 11, Puerto Morelos, Q. Roo · Terreno 490.68 m² · Construcción 2,600 m²</p>
+<div class="ctas"><a class="btn" href="#invertir">¿Por qué invertir en Puerto Morelos?</a></div>
+</div>
+</section>
+<section class="section olive" id="amenidades" data-screen-label="Amenidades">
+<div class="wrap">
+<div class="sh"><h2 class="display">Amenidades</h2><p class="accent">El Caribe desde el rooftop</p></div>
+<div class="amen">
+<div class="ph"><img src="assets/vilma-aerea-edificio.jpg" alt="Vista aérea del rooftop de Vilma: alberca infinita, camastros y jardineras"></div>
+<div>
+<ol>
+<li><span>01</span><span>Alberca con vista al mar</span></li>
+<li><span>02</span><span>Terraza con vista al mar</span></li>
+<li><span>03</span><span>Área de asoleadero</span></li>
+<li><span>04</span><span>Área de salas</span></li>
+<li><span>05</span><span>Área de asador</span></li>
+<li><span>06</span><span>Sauna y vapor</span></li>
+<li><span>07</span><span>Baños H y M</span></li>
+</ol>
+<p class="note">Todas las amenidades se encuentran en el rooftop. Acceso por elevador desde el lobby.</p>
+</div>
+</div>
+<div class="amen-strip">
+<div><img src="assets/vilma-rooftop-bar.jpg" alt="Área de salas y bar en el rooftop"></div>
+<div><img src="assets/vilma-rooftop-salas.jpg" alt="Terraza techada con salas y vista al mar"></div>
+</div>
+</div>
+</section>
+<section class="section linen" id="residencias" data-screen-label="Residencias">
+<div class="wrap">
+<div class="sh"><h2 class="display">Residencias</h2><p class="accent">Dos tipologías, una misma calma</p></div>
+<div class="types">
+<article class="type">
+<div class="ph"><img src="assets/vilma-terraza.jpg" alt="Terraza privada con jacuzzi y vista al mar"></div>
+<div class="bd">
+<p class="eyebrow">Vista al mar</p>
+<h3 class="display">Suite</h3>
+<p class="m2">De 42.20 a 58.90 m²</p>
+<ul>
+<li><span>Cocina integral</span><span>Incluida</span></li>
+<li><span>Sala / comedor</span><span>Integrados</span></li>
+<li><span>Habitación con closet</span><span>1</span></li>
+<li><span>Baño completo</span><span>1</span></li>
+<li><span>Terraza</span><span>5.30 a 11.10 m²</span></li>
+</ul>
+<div class="from"><span class="label" style="color:var(--text-secondary)">Desde</span><b data-desde-suite></b></div>
+</div>
+</article>
+<article class="type">
+<div class="ph"><img src="assets/vilma-sala.jpg" alt="Sala, comedor y cocina de una Grand Suite"></div>
+<div class="bd">
+<p class="eyebrow">Vista al manglar</p>
+<h3 class="display">Grand Suite</h3>
+<p class="m2">De 57.75 a 74.75 m²</p>
+<ul>
+<li><span>Cocina integral</span><span>Incluida</span></li>
+<li><span>Sala / comedor</span><span>Integrados</span></li>
+<li><span>Habitación con closet</span><span>1</span></li>
+<li><span>Baño completo</span><span>1</span></li>
+<li><span>Terraza</span><span>17 m² en planta baja</span></li>
+</ul>
+<div class="from"><span class="label" style="color:var(--text-secondary)">Desde</span><b data-desde-grand></b></div>
+</div>
+</article>
+</div>
+</div>
+</section>
+<section class="section" id="tipologias" data-screen-label="Tipologías">
+<div class="wrap">
+<div class="sh"><h2 class="display">Tipologías</h2><p class="accent">Distribución por nivel</p></div>
+<div class="lv-tabs" role="tablist" aria-label="Nivel" id="lvTabs"></div>
+<div id="lvPanels"></div>
+</div>
+</section>
+<section class="section linen" id="interiores" data-screen-label="Interiores">
+<div class="wrap">
+<div class="sh"><h2 class="display">Interiores</h2><p class="accent">Madera, luz natural y tonos de arena</p></div>
+<div class="gallery">
+<figure class="g1"><img src="assets/vilma-recamara.jpg" alt="Recámara con celosías de madera"><figcaption class="label">Recámara</figcaption></figure>
+<figure class="g2"><img src="assets/vilma-comedor.jpg" alt="Comedor con vista a la terraza"><figcaption class="label">Comedor</figcaption></figure>
+<figure class="g3"><img src="assets/vilma-cocina-detalle.jpg" alt="Cocina integral con gabinetes de madera, salpicadero de piedra y barra"><figcaption class="label">Cocina</figcaption></figure>
+<figure class="g4"><img src="assets/vilma-estancia.jpg" alt="Estancia con sofá cama"><figcaption class="label">Estancia</figcaption></figure>
+<figure class="g5"><img src="assets/vilma-sala.jpg" alt="Sala y comedor"><figcaption class="label">Sala</figcaption></figure>
+<figure class="g6"><img src="assets/vilma-terraza.jpg" alt="Terraza privada"><figcaption class="label">Terraza</figcaption></figure>
+</div>
+<div class="finishes" data-screen-label="Acabados">
+<div class="hd">
+<p class="eyebrow">Acabados</p>
+<h3 class="display">¿Con qué se entrega?</h3>
+<p class="accent">Listo para habitar o rentar</p>
+<p>Cada residencia se entrega terminada, con cocina equipada, carpintería integrada y acabados pensados para el clima del Caribe.</p>
+</div>
+<div class="fin-grid">
+<div class="fin"><span class="label">Pisos</span><ul><li>Porcelanato formato grande tipo travertino en interiores</li><li>Porcelanato antiderrapante en terraza y baño</li></ul></div>
+<div class="fin"><span class="label">Cocina</span><ul><li>Cocina integral con gabinetes en acabado madera</li><li>Cubierta y salpicadero de piedra natural</li><li>Tarja de acero inoxidable con monomando</li><li>Parrilla y campana integradas</li></ul></div>
+<div class="fin"><span class="label">Carpintería</span><ul><li>Puertas de madera de piso a techo</li><li>Closet y mueble de TV integrados en recámara</li><li>Celosías de madera en fachada y divisiones</li></ul></div>
+<div class="fin"><span class="label">Baño</span><ul><li>Cancel de cristal templado en regadera</li><li>Lavabo sobre cubierta y mueble de baño</li><li>Grifería monomando</li></ul></div>
+<div class="fin"><span class="label">Ventanería</span><ul><li>Cancelería de aluminio con cristal de piso a techo hacia la terraza</li></ul></div>
+<div class="fin"><span class="label">Iluminación y confort</span><ul><li>Luminarias LED empotradas</li><li>Ventiladores de techo en sala y recámara</li><li>Preparación para aire acondicionado</li></ul></div>
+<p class="fin-note">Especificaciones de referencia; pueden variar por disponibilidad de materiales. Su asesor le compartirá la ficha técnica completa.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section ink" id="invertir" data-screen-label="Por qué invertir">
+<div class="wrap">
+<div class="sh" style="border-color:var(--fgp-paper-16)"><h2 class="display">¿Por qué invertir en Puerto Morelos?</h2><p class="accent" style="color:var(--fgp-paper-70)">Temprano en la curva de un destino con oferta limitada</p></div>
+<div class="why-intro">
+<p class="accent">No se compra solo una unidad: se compra una posición temprana en el destino con menos saturación de la Riviera Maya.</p>
+<div class="txt">
+<p>Puerto Morelos está entre Cancún y Playa del Carmen, pero conserva el perfil de un pueblo boutique, lejos del turismo de fiesta masiva. Eso atrae a un comprador patrimonial que busca plusvalía a largo plazo y a un huésped de estancias más largas: buzos, familias y viajeros que buscan naturaleza.</p>
+<p>Ya sea para rentar en plan vacacional, para tener su espacio disponible cuando lo desee o como casa de retiro, la combinación de ubicación, baja oferta y demanda internacional sostiene el valor de su inversión.</p>
+</div>
+</div>
+<div class="why-stats">
+<div><b>73.8%</b><span class="label">Ocupación</span><span>Semana del 18 al 24 de julio de 2026, frente a 63.2% en Tulum.</span></div>
+<div><b>2</b><span class="label">Estaciones Tren Maya</span><span>El único municipio con dos paradas.</span></div>
+<div><b>17</b><span class="label">Desarrollos verticales</span><span>Contra ~184 en Playa del Carmen y ~201 en Cancún.</span></div>
+<div><b>15′</b><span class="label">Al aeropuerto</span><span>Aeropuerto Internacional de Cancún.</span></div>
+</div>
+<div class="why-grid">
+<article class="why"><span class="n">01</span><h3>Baja densidad, mayor plusvalía</h3><p>Menor saturación de oferta vertical que Cancún y Playa del Carmen, con mayor potencial de apreciación a mediano plazo.</p></article>
+<article class="why"><span class="n">02</span><h3>Ubicación estratégica</h3><p>A minutos del aeropuerto y entre los dos destinos más importantes del Caribe mexicano, sin el tráfico de la zona hotelera.</p></article>
+<article class="why"><span class="n">03</span><h3>Arrecife a la puerta</h3><p>El Sistema Arrecifal Mesoamericano atrae todo el año a un turista de mayor gasto y estancias más largas.</p></article>
+<article class="why"><span class="n">04</span><h3>Infraestructura en marcha</h3><p>Tren Maya, ampliación de la carretera federal 180 y obras en el corredor Leona Vicario: inversión pública que históricamente antecede a la plusvalía.</p></article>
+<article class="why"><span class="n">05</span><h3>Renta más estable</h3><p>La demanda depende menos de picos de temporada y festivales, y más de visitantes que reservan estancias largas: ingresos más predecibles.</p></article>
+<article class="why"><span class="n">06</span><h3>Precio de entrada accesible</h3><p>Todavía por debajo de Tulum y Playa del Carmen, con acceso al mismo mercado internacional de renta vacacional.</p></article>
+</div>
+<div class="why-close">
+<p class="accent">Una tesis de 5 a 10 años: patrimonio que se disfruta y que trabaja cuando usted no lo usa.</p>
+<div style="display:flex;gap:var(--space-4);flex-wrap:wrap"><a class="btn light" href="#roi">Ver rendimiento estimado</a><a class="btn ghost-light" href="#contacto">Hablar con un asesor</a></div>
+</div>
+<p class="src">Fuentes: Grupo Animal (31 jul. 2026), ocupación por destino; DF.cl, Puerto Morelos como polo de inversión y Tren Maya; conteo de desarrollos verticales con base en portales inmobiliarios, 2026. Información de referencia, no constituye asesoría financiera.</p>
+</div>
+</section>
+<section class="section linen" id="roi" data-screen-label="Rendimiento estimado">
+<div class="wrap">
+<div class="sh"><h2 class="display">Rendimiento estimado</h2><p class="accent">Renta vacacional en Puerto Morelos</p></div>
+<div class="roi">
+<div class="hd">
+<p>Tres escenarios de ocupación con base en datos de mercado de renta vacacional en la zona. El rendimiento neto se calcula sobre el precio de la unidad, después de costos operativos.</p>
+<div class="assume">
+<p><b>Ocupación de mercado:</b> 46% a 58% anual, con picos de 80–90% en temporada alta.</p>
+<p><b>Tarifa promedio por noche:</b> USD $140 (Suite) y USD $185 (Grand Suite).</p>
+<p><b>Costos operativos:</b> 33% estimado (administración de renta, mantenimiento y comisiones de plataformas).</p>
+</div>
+</div>
+<div>
+<div class="seg" role="group" aria-label="Tipología" id="roiSeg"><button aria-pressed="true" data-v="s">Suite</button><button aria-pressed="false" data-v="g">Grand Suite</button></div>
+<div class="scen" id="roiCards"></div>
+<div class="roi-note">
+<p>No incluye plusvalía del inmueble, que se suma aparte al retorno total.</p>
+<p>Cifras estimadas de referencia, no una proyección garantizada. Los resultados reales dependen de la ocupación, la tarifa, la administración y la situación del mercado. Precio de referencia en USD; consulte con su asesor el precio vigente de cada unidad.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="ink" id="disponibilidad" data-screen-label="Disponibilidad">
+<div class="wrap avail">
+<div>
+<p class="eyebrow" style="margin-bottom:var(--space-5);color:var(--fgp-paper-70)">Disponibilidad</p>
+<h2 class="display">Disponibilidad</h2>
+<p class="accent">Un asesor le compartirá las opciones de pago directamente</p>
+<p class="from-big">Desde <span data-desde></span><small>MXN</small></p>
+<div class="ctas">
+<a class="btn light" href="precios.html">Ver disponibilidad</a>
+<a class="btn ghost-light" href="#contacto">Hablar con un asesor</a>
+</div>
+</div>
+<div class="progress">
+<div class="pv"><span class="label">Avance de ventas</span><b data-pct></b></div>
+<div class="pbar" id="pbar" aria-hidden="true"><i class="s"></i><i class="r"></i></div>
+<div class="legend">
+<span><i style="background:var(--fgp-terracota)"></i><b data-vend></b>&nbsp;vendidas</span>
+<span><i style="background:var(--fgp-lino)"></i><b data-res></b>&nbsp;reservadas</span>
+<span><i style="background:var(--fgp-paper-16)"></i><b data-disp></b>&nbsp;disponibles</span>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="brochure" data-screen-label="Brochure">
+<div class="wrap bro">
+<div class="ph"><img src="assets/vilma-rooftop-bar.jpg" alt="Rooftop de Vilma"><div class="cover"><b>VILMA</b><span class="label">Brochure · Puerto Morelos</span></div></div>
+<div class="txt" id="broBox">
+<p class="eyebrow">Brochure</p>
+<h2 class="display">Descargue el brochure</h2>
+<p class="accent">Plantas, tipologías, amenidades y renders</p>
+<p>Déjenos su nombre y correo y descargue al instante la presentación completa de Vilma.</p>
+<form id="broForm" novalidate>
+<div class="field"><label class="label" for="b-nombre">Nombre completo</label><input id="b-nombre" name="nombre" autocomplete="name" required></div>
+<div class="field"><label class="label" for="b-email">Correo electrónico</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+<div class="field full"><label class="label" for="b-tel">Teléfono / WhatsApp (opcional)</label><input id="b-tel" name="tel" type="tel" autocomplete="tel"></div>
+<label class="consent"><input type="checkbox" id="b-ok" required><span>Acepto el aviso de privacidad y autorizo ser contactado por un asesor.</span></label>
+<div class="submit"><span class="err" id="bErr" role="alert"></span><button class="btn" type="submit">Descargar brochure</button></div>
+</form>
+<div class="bro-ok" role="status">
+<p class="eyebrow">Listo</p>
+<h3 class="display">Gracias, <span id="bName"></span></h3>
+<p>Su descarga comenzará en un momento. Si no inicia, use el botón.</p>
+<div style="display:flex;gap:var(--space-4);flex-wrap:wrap"><a class="btn" id="bDl" href="assets/Vilma-Brochure.pdf" download="Vilma-Brochure.pdf" target="_blank" rel="noopener">Descargar PDF</a><a class="btn ghost" href="#contacto">Agendar una visita</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section linen" id="contacto" data-screen-label="Contacto">
+<div class="wrap contact">
+<div class="aside">
+<p class="eyebrow">Contacto</p>
+<h2 class="display">Agende una visita</h2>
+<p class="accent">Con gusto le atendemos</p>
+<p>Déjenos sus datos y un asesor se pondrá en contacto con usted para compartirle disponibilidad, planos, opciones de pago y resolver cualquier duda sobre Vilma.</p>
+<a class="btn ghost" data-wa href="#contacto" style="justify-self:start">Escribir por WhatsApp</a>
+</div>
+<div id="leadBox">
+<form id="lead" novalidate>
+<div class="field"><label class="label" for="f-nombre">Nombre completo</label><input id="f-nombre" name="nombre" autocomplete="name" required></div>
+<div class="field"><label class="label" for="f-tel">Teléfono / WhatsApp</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" required></div>
+<div class="field full"><label class="label" for="f-email">Correo electrónico</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+<div class="field full"><span class="label" style="color:var(--text-secondary)">Me interesa</span>
+<div class="chips">
+<label><input type="checkbox" name="interes" value="Suite"><span>Suite</span></label>
+<label><input type="checkbox" name="interes" value="Grand Suite"><span>Grand Suite</span></label>
+<label><input type="checkbox" name="interes" value="Inversión"><span>Inversión</span></label>
+<label><input type="checkbox" name="interes" value="Uso vacacional"><span>Uso vacacional</span></label>
+</div></div>
+<div class="field"><label class="label" for="f-contacto">Contactarme por</label><select id="f-contacto" name="via"><option>WhatsApp</option><option>Llamada</option><option>Correo electrónico</option></select></div>
+<div class="field"><label class="label" for="f-horario">Horario preferido</label><select id="f-horario" name="horario"><option>Mañana</option><option>Tarde</option><option>Cualquier horario</option></select></div>
+<div class="field full"><label class="label" for="f-msg">Mensaje (opcional)</label><textarea id="f-msg" name="msg"></textarea></div>
+<label class="consent"><input type="checkbox" id="f-ok" required><span>Acepto el aviso de privacidad y autorizo ser contactado por un asesor.</span></label>
+<div class="submit"><span class="err" id="err" role="alert"></span><button class="btn" type="submit">Enviar solicitud</button></div>
+</form>
+<div class="thanks" role="status">
+<p class="eyebrow">Solicitud recibida</p>
+<h3 class="display">Gracias, <span id="tName"></span></h3>
+<p>Un asesor se pondrá en contacto con usted a la brevedad. Mientras tanto, puede revisar la lista de precios y la disponibilidad.</p>
+<div style="display:flex;gap:var(--space-4);flex-wrap:wrap"><a class="btn" href="precios.html">Ver disponibilidad</a><button class="btn ghost" type="button" id="again">Enviar otra solicitud</button></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer" data-screen-label="Footer">
+<div class="wrap">
+<div style="display:grid;gap:var(--space-5)">
+<a class="brand" href="#top" style="align-items:flex-start"><b style="margin-right:0">VILMA</b><small style="margin-right:0">CONDOS</small></a>
+<p>Melgar 11, Puerto Morelos, Quintana Roo.</p>
+</div>
+<div style="display:grid;gap:var(--space-3)">
+<p class="label" style="color:var(--fgp-white)">Explore</p>
+<p><a href="#amenidades">Amenidades</a></p>
+<p><a href="#residencias">Residencias</a></p>
+<p><a href="#invertir">Por qué invertir</a></p>
+<p><a href="precios.html">Disponibilidad</a></p>
+<p><a href="#brochure">Brochure</a></p>
+<p><a href="#contacto">Contacto</a></p>
+</div>
+<div style="display:grid;gap:var(--space-4)">
+<p class="label" style="color:var(--fgp-white)">Un proyecto de</p>
+<img src="assets/fgp-horizontal-blanco.svg" alt="Feel Good Properties" style="width:180px">
+</div>
+</div>
+<div class="legal"><div class="wrap"><span>© 2026 Vilma Condos</span><span>Imágenes ilustrativas. Sujeto a cambios sin previo aviso.</span></div></div>
+</footer>
+<a class="sold-pill" href="#disponibilidad"><i class="dot"></i><span><b data-pct></b> vendido</span></a>
+<a class="wa" data-wa href="#contacto" aria-label="Pedir informes por WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3.6 29l6.4-1.7c2 1.1 4.2 1.6 6.4 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.5c-2 0-4-.5-5.7-1.6l-.4-.2-3.8 1 1-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5 9.9 9.9 5.2 16 5.2s11 4.7 11 10.6-4.9 10.7-11 10.7zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.7s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg><span>Informes</span></a>
+<script>
+/* ===== Configuración editable ===== */
+const CFG={
+  whatsapp:'529983373040', // número con lada país, sin espacios. Vacío = lleva al formulario.
+  waMsg:'Hola, me interesa recibir información de Vilma Condos en Puerto Morelos.',
+  total:34, vendidas:12, reservadas:2,
+  desde:3355000, desdeSuite:3355000, desdeGrand:4650000
+};
+const ROI={s:{name:'Suite',price:'USD $205,000 – $215,000',adr:140,rows:[['Conservador',45,23000,7.3],['Moderado',56,28600,9.1],['Optimista',65,33200,10.6]]},
+g:{name:'Grand Suite',price:'USD $235,000 – $250,000',adr:185,rows:[['Conservador',45,30400,8.4],['Moderado',56,37800,10.4],['Optimista',65,43900,12.1]]}};
+/* ================================== */
+const mx=v=>'$'+v.toLocaleString('es-MX');
+const pct=Math.round(CFG.vendidas/CFG.total*100)+'%';
+const disp=CFG.total-CFG.vendidas-CFG.reservadas;
+const fill=(sel,v)=>document.querySelectorAll(sel).forEach(e=>e.textContent=v);
+fill('[data-desde]',mx(CFG.desde));fill('[data-pct]',pct);fill('[data-vend]',CFG.vendidas);fill('[data-res]',CFG.reservadas);fill('[data-disp]',disp);
+fill('[data-desde-suite]',mx(CFG.desdeSuite)+' MXN');fill('[data-desde-grand]',mx(CFG.desdeGrand)+' MXN');
+const pb=document.getElementById('pbar').children;pb[0].style.width=(CFG.vendidas/CFG.total*100)+'%';pb[1].style.width=(CFG.reservadas/CFG.total*100)+'%';
+if(CFG.whatsapp){const u='https://wa.me/'+CFG.whatsapp+'?text='+encodeURIComponent(CFG.waMsg);document.querySelectorAll('[data-wa]').forEach(a=>{a.href=u;a.target='_blank';a.rel='noopener'})}
+(()=>{const C=document.getElementById('roiCards'),S=document.getElementById('roiSeg');
+function r(k){const d=ROI[k];C.innerHTML=d.rows.map(([n,o,g,y],i)=>`<article class="sc${i===1?' mid':''}"><div class="top"><span class="label">${n}</span><span class="label">${o}% ocup.</span></div><div class="pct">≈ ${y.toFixed(1)}%<small>Rendimiento neto anual</small></div><dl><div><dd>Ingreso bruto anual</dd><dt>≈ USD $${g.toLocaleString('es-MX')}</dt></div><div><dd>Tarifa por noche</dd><dt>USD $${d.adr}</dt></div><div><dd>Precio de referencia</dd><dt>${d.price}</dt></div></dl></article>`).join('')}
+S.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));r(b.dataset.v)});r('s')})();
+(()=>{const I='assets/tipologias/';
+const L=[['PB','Planta baja',[['pb-suite','PB-01, PB-02','Suite',42.20,2],['pb-grand','PB-03, PB-04','Grand Suite',74.75,2]]],
+['01','Nivel 01',[['n1-01','101','Suite',58.90,1],['n1-02','102, 103, 104','Suite',52.00,3],['n1-grand','105, 106','Grand Suite',57.75,2]]],
+['02','Nivel 02',[['n2-01','201','Suite',58.90,1],['tipo-02','202, 203','Suite',52.00,2],['n2-04','204','Suite',47.65,1],['n2-grand','205, 206','Grand Suite',57.75,2]]],
+['03','Nivel 03',[['n3-01','301','Suite',58.90,1],['tipo-02','302, 303','Suite',52.00,2],['n3-04','304','Suite',47.65,1],['n3-grand','305, 306','Grand Suite',57.75,2]]],
+['04','Nivel 04',[['n4-01','401','Suite',47.50,1],['tipo-02','402, 403, 404','Suite',52.00,3],['n4-grand','405, 406','Grand Suite',57.75,2]]],
+['05','Nivel 05',[['n5-01','501','Suite',47.50,1],['tipo-02','502, 503, 504','Suite',52.00,3],['n5-grand','505, 506','Grand Suite',57.75,2]]]];
+const T=document.getElementById('lvTabs'),P=document.getElementById('lvPanels');
+L.forEach(([k,name,u],i)=>{const b=document.createElement('button');b.role='tab';b.textContent=name;b.setAttribute('aria-selected',i===0);b.id='t-'+k;b.setAttribute('aria-controls','lv-'+k);T.appendChild(b);
+const s=u.filter(x=>x[2]==='Suite').reduce((a,x)=>a+x[4],0),g=u.filter(x=>x[2]!=='Suite').reduce((a,x)=>a+x[4],0);
+const cols=u.map(x=>x[2]==='Suite'?'minmax(0,1fr)':'minmax(0,1.9fr)').join(' ');
+const d=document.createElement('div');d.className='lv';d.id='lv-'+k;d.role='tabpanel';d.setAttribute('aria-labelledby','t-'+k);d.hidden=i!==0;
+d.innerHTML=`<div class="lv-head"><div><p class="eyebrow" style="margin-bottom:var(--space-4)">${s+g} residencias</p><h3 class="display">${name}</h3><p class="accent">${s} Suite${s!==1?'s':''} · ${g} Grand Suite${g!==1?'s':''}</p></div><div class="cta"><a class="btn" href="#contacto">Solicitar planos</a><a class="btn ghost" href="precios.html">Ver disponibilidad</a></div></div><div class="tp-grid" style="--cols:${cols}">${u.map(([img,units,t,m])=>`<figure class="tp"><div class="im"><img src="${I+img}.jpg" alt="Tipología ${t}, unidades ${units}" loading="lazy"></div><figcaption><span class="label" style="color:var(--text-secondary)">${t}</span><span class="u">${units}</span><span class="meta"><span>${t==='Suite'?'Con terraza':'Vista al manglar'}</span><span>${m.toFixed(2)} m²</span></span></figcaption></figure>`).join('')}</div><p class="tp-note">Imágenes ilustrativas de la distribución.</p>`;P.appendChild(d)});
+T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;T.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',x===b));P.querySelectorAll('.lv').forEach(p=>p.hidden=p.id!=='lv-'+b.id.slice(2))});})();
+const okMail=m=>/^\S+@\S+\.\S+$/.test(m);
+const bf=document.getElementById('broForm'),bb=document.getElementById('broBox'),be=document.getElementById('bErr');
+bf.addEventListener('submit',e=>{e.preventDefault();
+const n=bf.nombre.value.trim(),m=bf.email.value.trim();
+if(!n||!m){be.textContent='Escriba su nombre y correo.';return}
+if(!okMail(m)){be.textContent='Revise el formato del correo electrónico.';return}
+if(!document.getElementById('b-ok').checked){be.textContent='Es necesario aceptar el aviso de privacidad.';return}
+be.textContent='';document.getElementById('bName').textContent=n.split(' ')[0];bb.classList.add('bro-sent');
+setTimeout(()=>{try{document.getElementById('bDl').click()}catch(_){}},400)});
+const f=document.getElementById('lead'),box=document.getElementById('leadBox'),err=document.getElementById('err');
+f.addEventListener('submit',e=>{e.preventDefault();
+const n=f.nombre.value.trim(),t=f.tel.value.trim(),m=f.email.value.trim();
+if(!n||!t||!m){err.textContent='Complete nombre, teléfono y correo.';return}
+if(!okMail(m)){err.textContent='Revise el formato del correo electrónico.';return}
+if(!document.getElementById('f-ok').checked){err.textContent='Es necesario aceptar el aviso de privacidad.';return}
+err.textContent='';document.getElementById('tName').textContent=n.split(' ')[0];box.classList.add('sent')});
+document.getElementById('again').onclick=()=>{f.reset();box.classList.remove('sent')};
+(()=>{const G=[['.gallery figure',f=>f.querySelector('figcaption')?.textContent||''],['#amenidades .amen .ph, #amenidades .amen-strip>div',()=>'Amenidades'],['#residencias .type .ph',f=>f.closest('.type')?.querySelector('h3')?.textContent||'Residencias']];
+G.forEach(([sel,capOf])=>{const figs=[...document.querySelectorAll(sel)];if(!figs.length)return;figs.forEach(f=>{if(!f.matches('.gallery figure'))f.classList.add('zoomable');f._cap=capOf(f)});
+const lb=document.createElement('div');lb.className='lb';lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Galería de interiores');
+lb.innerHTML='<figure><img alt=""><figcaption class="label"><span></span><span></span></figcaption></figure><button class="x" aria-label="Cerrar">×</button><button class="pv" aria-label="Anterior">‹</button><button class="nx" aria-label="Siguiente">›</button>';
+document.body.appendChild(lb);const im=lb.querySelector('img'),cap=lb.querySelectorAll('figcaption span');let i=0,last=null;
+const show=k=>{i=(k+figs.length)%figs.length;const s=figs[i].querySelector('img');im.src=s.src;im.alt=s.alt;cap[0].textContent=figs[i]._cap;cap[1].textContent=(i+1)+' / '+figs.length};
+const open=k=>{last=document.activeElement;show(k);lb.classList.add('open');document.body.style.overflow='hidden';lb.querySelector('.x').focus()};
+const close=()=>{lb.classList.remove('open');document.body.style.overflow='';last&&last.focus()};
+figs.forEach((f,k)=>{f.tabIndex=0;f.setAttribute('role','button');f.setAttribute('aria-label','Ampliar '+(f._cap||'imagen'));f.addEventListener('click',()=>open(k));f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(k)}})});
+lb.querySelector('.x').onclick=close;lb.querySelector('.pv').onclick=e=>{e.stopPropagation();show(i-1)};lb.querySelector('.nx').onclick=e=>{e.stopPropagation();show(i+1)};
+lb.addEventListener('click',e=>{if(e.target===lb||e.target===im)close()});
+let sx=null;lb.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});lb.addEventListener('touchend',e=>{if(sx===null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)show(i+(d<0?1:-1));sx=null});
+if(figs.length<2){lb.querySelector('.pv').hidden=true;lb.querySelector('.nx').hidden=true}
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});})})();
+</script>
+</body>
+</html>

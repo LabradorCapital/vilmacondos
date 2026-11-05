@@ -1,0 +1,33 @@
+/* Feel Good Properties — webfonts.
+   Both families ship as variable fonts from the brand delivery (Tipografías/).
+   Bodoni Moda carries an optical-size axis; the brand masters at 18pt, so
+   optical sizing is locked rather than left to the browser. */
+
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("../assets/fonts/BodoniModa-VariableFont_opsz,wght.ttf") format("truetype-variations");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  src: url("../assets/fonts/BodoniModa-Italic-VariableFont_opsz,wght.ttf") format("truetype-variations");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../assets/fonts/WorkSans-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url("../assets/fonts/WorkSans-Italic-VariableFont_wght.ttf") format("truetype-variations");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}

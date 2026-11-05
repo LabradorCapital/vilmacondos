@@ -1,0 +1,37 @@
+/* Feel Good Properties — status colours. DERIVED, NOT IN THE MANUAL.
+   The identity defines no success/warning/danger/info roles. Product UI needs
+   them, so they are mapped onto the brand's own hues wherever possible:
+   success = OLIVA, danger = TERRACOTA (the palette's deep red), info = ink.
+   WARNING has no brand counterpart — --fgp-ocre is one new hue, derived in
+   OKLCH to sit with the palette. All four are flagged for brand-owner
+   sign-off (readme §9). Never use colour alone: pair with icon + label. */
+
+:root {
+  --fgp-ocre: #8a6d3b; /* derived warning hue — flagged */
+
+  --status-success-fg: var(--fgp-oliva);
+  --status-success-bg: #f0f0e9;
+  --status-success-border: var(--fgp-oliva);
+  --status-danger-fg: var(--fgp-terracota);
+  --status-danger-bg: #f5eded;
+  --status-danger-border: var(--fgp-terracota);
+  --status-warning-fg: var(--fgp-ocre);
+  --status-warning-bg: #f6f0e4;
+  --status-warning-border: var(--fgp-ocre);
+  --status-info-fg: var(--fgp-ink-62);
+  --status-info-bg: var(--fgp-lino);
+  --status-info-border: var(--fgp-ink-26);
+
+  /* Data-viz (derived; categorical order fixed; colourblind-checked pairs
+     rely on position + label, never hue alone) */
+  --chart-1: var(--fgp-oliva);
+  --chart-2: var(--fgp-terracota);
+  --chart-3: var(--fgp-oliva-claro);
+  --chart-4: var(--fgp-ocre);
+  --chart-5: var(--fgp-ink-45);
+  --chart-6: var(--fgp-oliva-oscuro);
+  --chart-grid: var(--fgp-ink-08);
+  --chart-axis: var(--fgp-ink-45);
+  --chart-positive: var(--fgp-oliva);   /* pair with ▲ / + */
+  --chart-negative: var(--fgp-terracota); /* pair with ▼ / − */
+}
