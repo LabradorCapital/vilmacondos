@@ -9,6 +9,7 @@ Sitio estático de Vilma Condos (diseño exportado de Claude Design, sistema de 
 - `vilma.css` — estilos compartidos
 - `ds/` — tokens y tipografías del sistema de diseño Feel Good Properties
 - `assets/` — fotografías, plantas tipo y brochure en PDF
+- `google-sheets/` — script para guardar los formularios en Google Sheets (ver su README)
 
 ## Editar datos
 

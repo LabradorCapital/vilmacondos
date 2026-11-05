@@ -585,6 +585,8 @@ form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-
 <script>
 /* ===== Configuración editable ===== */
 const CFG={
+  // URL de la app web de Google Apps Script (ver google-sheets/README.md). Vacío = no se guardan los datos.
+  sheetUrl:'https://script.google.com/macros/s/AKfycby2xhy9HM7dpCcIaturxQjp0YSuBCM3Lnn-sMWl4d5rgvjP9ke0tvYsw1KLWr1nE2st/exec',
   whatsapp:'529983373040', // número con lada país, sin espacios. Vacío = lleva al formulario.
   waMsg:'Hola, me interesa recibir información de Vilma Condos en Puerto Morelos.',
   total:34, vendidas:12, reservadas:2,
@@ -619,13 +621,15 @@ const d=document.createElement('div');d.className='lv';d.id='lv-'+k;d.role='tabp
 d.innerHTML=`<div class="lv-head"><div><p class="eyebrow" style="margin-bottom:var(--space-4)">${s+g} residencias</p><h3 class="display">${name}</h3><p class="accent">${s} Suite${s!==1?'s':''} · ${g} Grand Suite${g!==1?'s':''}</p></div><div class="cta"><a class="btn" href="#contacto">Solicitar planos</a><a class="btn ghost" href="precios.html">Ver disponibilidad</a></div></div><div class="tp-grid" style="--cols:${cols}">${u.map(([img,units,t,m])=>`<figure class="tp"><div class="im"><img src="${I+img}.jpg" alt="Tipología ${t}, unidades ${units}" loading="lazy"></div><figcaption><span class="label" style="color:var(--text-secondary)">${t}</span><span class="u">${units}</span><span class="meta"><span>${t==='Suite'?'Con terraza':'Vista al manglar'}</span><span>${m.toFixed(2)} m²</span></span></figcaption></figure>`).join('')}</div><p class="tp-note">Imágenes ilustrativas de la distribución.</p>`;P.appendChild(d)});
 T.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;T.querySelectorAll('button').forEach(x=>x.setAttribute('aria-selected',x===b));P.querySelectorAll('.lv').forEach(p=>p.hidden=p.id!=='lv-'+b.id.slice(2))});})();
 const okMail=m=>/^\S+@\S+\.\S+$/.test(m);
+const send=(form,d)=>{if(!CFG.sheetUrl)return;d.formulario=form;d.pagina=location.href;
+try{fetch(CFG.sheetUrl,{method:'POST',mode:'no-cors',body:new URLSearchParams(d),keepalive:true}).catch(()=>{})}catch(_){}};
 const bf=document.getElementById('broForm'),bb=document.getElementById('broBox'),be=document.getElementById('bErr');
 bf.addEventListener('submit',e=>{e.preventDefault();
 const n=bf.nombre.value.trim(),m=bf.email.value.trim();
 if(!n||!m){be.textContent='Escriba su nombre y correo.';return}
 if(!okMail(m)){be.textContent='Revise el formato del correo electrónico.';return}
 if(!document.getElementById('b-ok').checked){be.textContent='Es necesario aceptar el aviso de privacidad.';return}
-be.textContent='';document.getElementById('bName').textContent=n.split(' ')[0];bb.classList.add('bro-sent');
+be.textContent='';send('Brochure',{nombre:n,email:m,tel:bf.tel.value.trim()});document.getElementById('bName').textContent=n.split(' ')[0];bb.classList.add('bro-sent');
 setTimeout(()=>{try{document.getElementById('bDl').click()}catch(_){}},400)});
 const f=document.getElementById('lead'),box=document.getElementById('leadBox'),err=document.getElementById('err');
 f.addEventListener('submit',e=>{e.preventDefault();
@@ -633,7 +637,7 @@ const n=f.nombre.value.trim(),t=f.tel.value.trim(),m=f.email.value.trim();
 if(!n||!t||!m){err.textContent='Complete nombre, teléfono y correo.';return}
 if(!okMail(m)){err.textContent='Revise el formato del correo electrónico.';return}
 if(!document.getElementById('f-ok').checked){err.textContent='Es necesario aceptar el aviso de privacidad.';return}
-err.textContent='';document.getElementById('tName').textContent=n.split(' ')[0];box.classList.add('sent')});
+err.textContent='';send('Contacto',{nombre:n,tel:t,email:m,interes:[...f.querySelectorAll('[name=interes]:checked')].map(x=>x.value).join(', '),via:f.via.value,horario:f.horario.value,msg:f.msg.value.trim()});document.getElementById('tName').textContent=n.split(' ')[0];box.classList.add('sent')});
 document.getElementById('again').onclick=()=>{f.reset();box.classList.remove('sent')};
 (()=>{const G=[['.gallery figure',f=>f.querySelector('figcaption')?.textContent||''],['#amenidades .amen .ph, #amenidades .amen-strip>div',()=>'Amenidades'],['#residencias .type .ph',f=>f.closest('.type')?.querySelector('h3')?.textContent||'Residencias']];
 G.forEach(([sel,capOf])=>{const figs=[...document.querySelectorAll(sel)];if(!figs.length)return;figs.forEach(f=>{if(!f.matches('.gallery figure'))f.classList.add('zoomable');f._cap=capOf(f)});
